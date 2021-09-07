@@ -15,4 +15,4 @@ use App\Http\Controllers\ApiController;
 |
 */
 
-Route::get('/flights', [ApiController::class, 'consultApi']);
+Route::get('/flights', [ApiController::class, 'flightsGrp']);
