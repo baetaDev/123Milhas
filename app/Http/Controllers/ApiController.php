@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Http;
 
 class ApiController extends Controller
 {
-    const API = 'http://prova.123milhas.net/api/flights';
+    const API_123_milhas = 'http://prova.123milhas.net/api/flights';
 
     public function consultApi(){
-        $consultApi = Http::get(self::API);
+        $consultApi = Http::get(self::API_123_milhas);
 
         return $consultApi->json();
     }
