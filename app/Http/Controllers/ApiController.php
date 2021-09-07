@@ -74,8 +74,19 @@ class ApiController extends Controller
         $modeloResult['cheapestPrice'] = $modeloResult['groups']['0']['price']; // preço do grupo mais barato
         $modeloResult['cheapestGroup'] = $modeloResult['groups']['0']['id']; // id único do grupo mais barato
         
-        //retorna um json
-        return json_encode($modeloResult);
+        try {
+            return response()->json([
+                'message' => '',
+                'data' => $modeloResult,
+                'result' => true,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+                'data' => '',
+                'result' => false,
+            ], 401);
+        }
     }
 
 }
