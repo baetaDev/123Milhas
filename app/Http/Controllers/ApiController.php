@@ -9,14 +9,24 @@ class ApiController extends Controller
 {
     const API_123_milhas = 'http://prova.123milhas.net/api/flights';
 
+    public function flightsGrp()
+    {
+        $flights = $this->consultApi();
+        $flightsGrpInOut = $this->separateFlights($flights);
+        $data = $this->dataFlights($flightsGrpInOut->grpInbound, $flightsGrpInOut->grpOutbound, $flights);
+
+        return $data;
+    }
+
+    //onsulta a api externa
     public function consultApi(){
         $consultApi = Http::get(self::API_123_milhas);
 
         return $consultApi->json();
     }
 
-    public function flightsGrp(){
-        $flights = $this->consultApi();
+    //separa os voos por tarifa e tambemm por ida e volta
+    private function separateFlights($flights){
 
         //adiciona todos os voos de ida (outbound)
         $outbound = array_filter($flights, function ($flights) {
@@ -42,11 +52,19 @@ class ApiController extends Controller
             $grpOutbound[$value['fare']][$value['price']][] = $value;
         }
         //dd($grpInbound, $grpOutbound);
-        
+
+        return (object)[
+            'grpInbound' => $grpInbound,
+            'grpOutbound' => $grpOutbound
+        ];
+
+    }
+    //Monta os grupos
+    private function dataFlights($grpInbound, $grpOutbound, $flights){
         $groups = [];
         $group = [];
         $id = 0;
-        //monta os dados
+        
         foreach($grpOutbound as $key => $value){
             $grpInboundFare = $grpInbound[$key];
             foreach($value as $keyPriceOut => $grpOut){
