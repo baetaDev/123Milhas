@@ -18,7 +18,7 @@ class ApiController extends Controller
         return $data;
     }
 
-    //onsulta a api externa
+    //Consulta a api externa
     public function consultApi(){
         $consultApi = Http::get(self::API_123_milhas);
 
