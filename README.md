@@ -28,9 +28,16 @@ Pontos de Avaliação
 - Separação de responsabilidades;
 - Lógica e otimização de processamento;
 
+# Visão geral
+A API retorna voos agrupados em voos de ida e volta, tarifa e preços, após uma consulta a outra API externa.
+
+A API foi construída utilizando o framework Laravel 8.x.
+
 # Requisitos
 Composer
+
 PHP 7.4
+
 Laravel 8.x
 # Instalação
 
@@ -43,9 +50,8 @@ $ composer install
 ## Execute a aplicação em modo de desenvolvimento
 $ php artisan serve
 
-## rota da API
-
-
+# Rota da API
+## Tipo GET
 
 <h1 align="center">
     <a href="http://127.0.0.1:8000/api/flights">🔗 http://127.0.0.1:8000/api/flights</a>
